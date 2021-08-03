@@ -260,8 +260,8 @@ function getVizOne() {
 
     let p = `
       <br>
-      In this presentation, we discuss how major food categories change available to New Yorkers changes over time.
-      The NYPL data set was processed so that only dishes that are in the top 200 are considered. This ranking is based
+      In this presentation, we discuss how major food categories available to New Yorkers changes over time.
+      The NYPL data set was processed so that only dishes that are in the top 200 and within target categories are considered. This ranking is based
       on how often a dish shows up across all menus scanned during the period. Dishes not related to
       major food categories were eliminated to simplify the dataset and scope. The original dataset had a date range that 
       required to be pivoted, increasing the size of the dataset substantially.<br><br>

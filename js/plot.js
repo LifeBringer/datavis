@@ -1,8 +1,8 @@
 var page, data;
 async function init() {
     page = 1
-    data = await d3.csv("./data/ranking_dish.csv");
-    data2 = await d3.csv("./data/bubble_dish.csv");
+    data = await d3.csv("data/ranking_dish.csv");
+    data2 = await d3.csv("data/bubble_dish.csv");
     getVizOne();
 }
 
@@ -46,7 +46,7 @@ function getVizOne() {
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle");
 
-        d3.csv('./data/ranking_dish.csv').then(function (data) {
+        d3.csv('data/ranking_dish.csv').then(function (data) {
             var parseDate = d3.timeParse("%Y-%m-%d");
             var formatDate = d3.timeFormat("%Y");
 
@@ -274,7 +274,7 @@ function getVizOne() {
 }
 
 function getVizSecond() {
-        const data = d3.csv('./data/bubble_dish.csv').then(function (data) {
+        const data = d3.csv('data/bubble_dish.csv').then(function (data) {
         var width = 1600;
         var height = 600;
         var margin = 50;

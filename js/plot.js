@@ -440,7 +440,7 @@ function getVizThree() {
         { label: "Seafood", count: 18107 },
         { label: "Chicken", count: 8054 },
         { label: "Steak", count: 15545 },
-        { label: "Steak, Chicken & Seafood", count: 50 },
+        { label: "Steak, Chicken & Seafood", count: 500 },
         { label: "Seafood & Chicken", count: 8000 },
         { label: "Seafood & Steak", count: 5000 },
     ];

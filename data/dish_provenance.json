@@ -1,0 +1,73 @@
+"name": "name",
+"columnName": "name",
+"query": "Steak",
+"mode": "text",
+"caseSensitive": false,
+"invert": false
+}
+],
+"mode": "row-based"
+},
+"baseColumnName": "name",
+"expression": "grel:\"steak\"",
+"onError": "set-to-blank",
+"newColumnName": "main_ingredient_steak",
+"columnInsertIndex": 2,
+"description": "Create column main_ingredient_steak at index 2 based on column name using expression grel:\"steak\""
+},
+{
+    "op": "core/column-addition",
+    "engineConfig": {
+	"facets": [
+	    {
+		"type": "text",
+		"name": "name",
+		"columnName": "name",
+		"query": "Clam|Trout|Lobster|Crab|Salmon|Anchovies|Caviar|Oysters|Bass|Sardines|Scallops",
+		"mode": "regex",
+		"caseSensitive": false,
+		"invert": false
+	    }
+	],
+	"mode": "row-based"
+    },
+    "baseColumnName": "name",
+    "expression": "grel:\"seafood\"",
+    "onError": "set-to-blank",
+    "newColumnName": "main_ingredient_seafood",
+    "columnInsertIndex": 2,
+    "description": "Create column main_ingredient_seafood at index 2 based on column name using expression grel:\"seafood\""
+},
+{
+    "op": "core/column-addition",
+    "engineConfig": {
+	"facets": [],
+	"mode": "row-based"
+    },
+    "baseColumnName": "main_ingredient_seafood",
+    "expression": "join ([coalesce(cells['main_ingredient_seafood'].value,''),coalesce(cells['main_ingredient_steak'].value,''),coalesce(cells['main_ingredient_chicken'].value,'')],'')",
+    "onError": "keep-original",
+    "newColumnName": "main_ingredient",
+    "columnInsertIndex": 3,
+    "description": "Create column main_ingredient at index 3 based on column main_ingredient_seafood using expression join ([coalesce(cells['main_ingredient_seafood'].value,''),coalesce(cells['main_ingredient_steak'].value,''),coalesce(cells['main_ingredient_chicken'].value,'')],'')"
+},
+{
+    "op": "core/column-move",
+    "columnName": "main_ingredient",
+    "index": 2,
+    "description": "Move column main_ingredient to position 2"
+},
+{
+    "op": "core/text-transform",
+    "engineConfig": {
+	"facets": [],
+	"mode": "row-based"
+    },
+    "columnName": "main_ingredient",
+    "expression": "grel:if(value == \"\", \"Unknown\" , value)",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column main_ingredient using expression grel:if(value == \"\", \"Unknown\" , value)"
+}
+]

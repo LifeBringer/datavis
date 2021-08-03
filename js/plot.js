@@ -7,7 +7,7 @@ async function init() {
 }
 
 function getVizOne() {
-        var margin = { top: 20, right: 80, bottom: 10, left: 120 },
+        var margin = { top: 20, right: 80, bottom: 10, left: 300},
             width = 1000,
             height = 600,
             gap = 5,
@@ -336,7 +336,7 @@ function getVizSecond() {
 
         // Forces applied to nodes:
         var simulation = d3.forceSimulation()
-            .force("center", d3.forceCenter().x(450).y(300))
+            .force("center", d3.forceCenter().x(650).y(300))
             .force("charge", d3.forceManyBody().strength(0.3))
             .force("collide", d3.forceCollide().strength(.05).radius(50).iterations(1))
         simulation.nodes(dataByRegion)
@@ -386,7 +386,7 @@ function getVizSecond() {
 
 
                 svg.append("g")
-                    .attr("transform", "translate(1000,100)")
+                    .attr("transform", "translate(1600,100)")
                     .call(d3.axisBottom(x));
 
                 svg.append("g")
@@ -473,7 +473,7 @@ function getVizThree() {
         .attr('width', width) // set the width of the svg element we just added
         .attr('height', height) // set the height of the svg element we just added
         .append('g') // append 'g' element to the svg element
-        .attr('transform', 'translate(' + (width /3.5) + ',' + (height / 2) + ')'); // our reference is now to the 'g' element. centerting the 'g' element to the svg element
+        .attr('transform', 'translate(' + (width / 2.5) + ',' + (height / 2) + ')'); // our reference is now to the 'g' element. centerting the 'g' element to the svg element
 
     var arc = d3.arc()
         .innerRadius(radius - donutWidth) // radius - donutWidth = size of donut hole. use 0 for pie chart

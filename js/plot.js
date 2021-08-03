@@ -256,7 +256,7 @@ function getVizOne() {
 
         });
 
-    d3.select('#page').text(`Page ${page} / 3`)
+    d3.select('#page').text(`Scene ${page} / 3`)
 
     let p = `
       <br>
@@ -664,7 +664,7 @@ function nextPage() {
     if (page == 3) return;
     page = Math.min(page + 1, 3)
     d3.select('#scatterplot').html("")
-    d3.select('#page').text(`Page ${page} / 3`)
+    d3.select('#page').text(`Scene ${page} / 3`)
     pageMod(page);
 }
 
@@ -672,7 +672,7 @@ function prevPage() {
     if (page == 1) return;
     page = Math.max(page - 1, 1)
     d3.select('#scatterplot').html("")
-    d3.select('#page').text(`Page ${page} / 3`)
+    d3.select('#page').text(`Scene ${page} / 3`)
     pageMod(page);
 }
 

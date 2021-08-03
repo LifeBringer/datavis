@@ -1,0 +1,118 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    background: rgb(49, 53, 55);
+}
+
+p, h1, h2, h3, h4 {
+    color:rgb(206, 206, 206);
+    margin-left: 80px;
+}
+
+path.domain {
+    display: none;
+}
+
+text {
+    font: 11px sans-serif;
+    fill: lightgrey;
+}
+
+.date {
+    font-size: 40px;
+    font-weight: 800;
+    opacity: 0.25;
+}
+
+.tick line {
+    stroke: #cccccc;
+}
+
+.select {
+    font: bold 14px Verdana;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+    cursor: pointer;
+}
+
+.domain {
+    stroke:white;
+}
+
+.axisText {
+    font: 20px sans-serif;
+}
+
+.subject {
+    stroke-width: 2;
+    stroke-dasharray: 2px;
+    fill: none
+}
+
+.annotation-note-title,.annotation-note-label {
+    fill:white;
+}
+
+.annotation path {
+    stroke: white;
+}
+
+
+/* Page buttons */
+.noclick {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.pagination>.noclick>a {
+    color: grey;
+}
+
+.pagination>.active>a {
+    color: white;
+}
+
+/* tooltip */
+.tooltip {
+  background: #eee;
+  box-shadow: 0 0 5px #999999;
+  color: #333;
+  display: none;
+  font-size: 18px;
+  left: 130px;
+  padding: 10px;
+  position: absolute;
+  text-align: center;
+  top: 95px;
+  width: 80px;
+  z-index: 10;
+}
+
+/* chart */
+#scatterplot {
+  height: 600px;
+  margin: 0 auto;
+  position: relative;
+  display: block;
+  width: 1600px; 
+}
+
+/* legend */
+.legend {
+  font-size: 14px;
+}
+
+rect {
+  cursor: pointer; 
+  stroke-width: 2;
+}
+
+rect.disabled {
+  fill: transparent !important;
+}

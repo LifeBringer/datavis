@@ -7,8 +7,8 @@ async function init() {
 }
 
 function getVizOne() {
-        var margin = { top: 20, right: 80, bottom: 10, left: 300},
-            width = 1000,
+        var margin = { top: 20, right: 80, bottom: 10, left: 250},
+            width = 1400,
             height = 600,
             gap = 5,
             num = 20,
@@ -275,7 +275,7 @@ function getVizOne() {
 
 function getVizSecond() {
         const data = d3.csv('data/bubble_dish.csv').then(function (data) {
-        var width = 1600;
+        var width = 1400;
         var height = 600;
         var margin = 50;
 
@@ -296,7 +296,7 @@ function getVizSecond() {
 
 
 
-        // Initializeing the circle at center of the canvas
+        // Initializing the circle at center of the canvas
         var node = svg.selectAll(".node")
             .data(dataByRegion)
             .enter().append("g")
@@ -310,7 +310,7 @@ function getVizSecond() {
 
         //Outer Dish
         node.append("circle")
-            .attr("class", "avacado")
+            .attr("class", "dish")
             .attr("r", function (d) { return +d.value.avg * 30; })
             .style("fill", "grey")
             .style("fill-opacity", 0.6)
@@ -319,7 +319,7 @@ function getVizSecond() {
 
         //Dish Center
         node.append("circle")
-            .attr("class", "pit")
+            .attr("class", "center")
             .attr("r", function (d) { return +d.value.avg * 20; })
             .style("fill", "lightgrey")
             .style("fill-opacity", 0.5)
@@ -383,10 +383,8 @@ function getVizSecond() {
                 x.domain(dataAtRegionBySeason.map(function (d) { return d.key; }));
                 y.domain([0, d3.max(dataAtRegionBySeason, function (d) { return +d.value.avg; })]).nice();
 
-
-
                 svg.append("g")
-                    .attr("transform", "translate(1600,100)")
+                    .attr("transform", "translate(1400,100)")
                     .call(d3.axisBottom(x));
 
                 svg.append("g")
@@ -417,17 +415,14 @@ function getVizSecond() {
             svg.select("#bubble").remove();
         }
 
-        function moreDetails(d, i) {
-
-
-        }
-
     });
 
     let p = `
       From the dishes in the chart above averages the mean pricing of food available to consumers. The radius of the dish represents the popularity
-      of the dish. Notice any trends between food prices and volume? If we added commodity foods such as coffee, drinks, we would see
-      a positive trend between volume and pricing. <br><br>Please feel free to bring dishes side-by-side to examine further.
+      of the dish. Notice any trends between food prices and popularity? If we added commodity foods such as coffee, drinks, we would see
+      a positive trend between popularity and pricing. <br><br>Please feel free to bring dishes side-by-side to examine further. <br><br>
+      Thank you for joining me in this journey! Remember that a major aspect of this narrative was the processing of the raw data.
+      This was  accomplished using the pandas library through Jupyter Notebooks.<br><br>
       `
     d3.select('#intro')
         .html(p)
@@ -446,18 +441,15 @@ function getVizThree() {
     ];
 
     // chart dimensions
-    var width = 1600;
+    var width = 1400;
     var height = 600;
 
     // a circle chart needs a radius
     var radius = Math.min(width, height) / 2;
-    var donutWidth = 75; // size of donut hole. not needed if doing pie chart
-
+    var donutWidth = 75;
     // legend dimensions
-    var legendRectSize = 25; // defines the size of the colored squares in legend
-    var legendSpacing = 6; // defines spacing between squares
-
-    // define color scale
+    var legendRectSize = 25; 
+    var legendSpacing = 6; 
     var color = d3.scaleOrdinal(d3.schemeDark2);
 
     // calculate new total
@@ -468,57 +460,64 @@ function getVizThree() {
         .append('span')
         .attr('class', 'newTotal').text(total);
 
-    var svg = d3.select('#scatterplot') // select element in the DOM with id 'chart'
-        .append('svg') // append an svg element to the element we've selected
-        .attr('width', width) // set the width of the svg element we just added
-        .attr('height', height) // set the height of the svg element we just added
-        .append('g') // append 'g' element to the svg element
-        .attr('transform', 'translate(' + (width / 2.5) + ',' + (height / 2) + ')'); // our reference is now to the 'g' element. centerting the 'g' element to the svg element
+    var svg = d3.select('#scatterplot') 
+        .append('svg') 
+        .attr('width', width) 
+        .attr('height', height) 
+        .append('g') 
+        .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')'); 
 
     var arc = d3.arc()
-        .innerRadius(radius - donutWidth) // radius - donutWidth = size of donut hole. use 0 for pie chart
+        .innerRadius(radius - donutWidth) 
         .outerRadius(radius); // size of overall chart
 
-    var pie = d3.pie() // start and end angles of the segments
-        .value(function (d) { return d.count; }) // how to extract the numerical data from each entry in our dataset
-        .sort(null); // by default, data sorts in oescending value. this will mess with our animation so we set it to null
+    var pie = d3.pie()
+        .value(function (d) { return d.count; }) 
+        .sort(null); 
+
+
 
     //**********************
     //        TOOLTIP
     //**********************
 
-    var tooltip = d3.select('#scatterplot') // select element in the DOM with id 'chart'
-        .append('div') // append a div element to the element we've selected                                    
-        .attr('class', 'tooltip'); // add class 'tooltip' on the divs we just selected
+    var tooltip = d3
+        .select("#scatterplot") // select element in the DOM with id 'chart'
+        .append("div") // append a div element to the element we've selected
+        .attr("class", "tooltip"); // add class 'tooltip' on the divs we just selected
 
-    tooltip.append('div') // add divs to the tooltip defined above
-        .attr('class', 'label'); // add class 'label' on the selection
-    tooltip.append('div') // add divs to the tooltip defined above   
-        .attr('class', 'count'); // add class 'count' on the selection                  
-    tooltip.append('div') // add divs to the tooltip defined above  
-        .attr('class', 'percent'); // add class 'percent' on the selection
+    tooltip
+        .append("div") // add divs to the tooltip defined above
+        .attr("class", "label"); // add class 'label' on the selection
+    tooltip
+        .append("div") // add divs to the tooltip defined above
+        .attr("class", "count"); // add class 'count' on the selection
+    tooltip
+        .append("div") // add divs to the tooltip defined above
+        .attr("class", "percent"); // add class 'percent' on the selection
+        
 
     dataset.forEach(function (d) {
-        d.count = +d.count; // calculate count as we iterate through the data
-        d.enabled = true; // add enabled property to track which entries are checked
+        d.count = +d.count; 
+        d.enabled = true; 
     });
 
     // creating the chart
-    var path = svg.selectAll('path') // select all path elements inside the svg. specifically the 'g' element. they don't exist yet but they will be created below
-        .data(pie(dataset)) //associate dataset wit he path elements we're about to create. must pass through the pie function. it magically knows how to extract values and bakes it into the pie
-        .enter() //creates placeholder nodes for each of the values
-        .append('path') // replace placeholders with path elements
-        .attr('d', arc) // define d attribute with arc function above
-        .attr('fill', function (d) { return color(d.data.label); }) // use color scale to define fill of each label in dataset
+    var path = svg.selectAll('path') 
+        .data(pie(dataset)) 
+        .enter() 
+        .append('path') 
+        .attr('d', arc) 
+        .attr('fill', function (d) { return color(d.data.label); }) 
         .each(function (d) { this._current - d; }); // creates a smooth animation for each track
 
     // mouse event handlers are attached to path so they need to come after its definition
-    path.on('mouseover', function (d) {  // when mouse enters div      
-        var total = d3.sum(dataset.map(function (d) { // calculate the total number of tickets in the dataset         
-            return (d.enabled) ? d.count : 0; // checking to see if the entry is enabled. if it isn't, we return 0 and cause other percentages to increase                                      
+    path.on('mouseover', function (d) {   
+        var total = d3.sum(dataset.map(function (d) {        
+            return (d.enabled) ? d.count : 0;                                      
         }));
-        var percent = Math.round(1000 * d.data.count / total) / 10; // calculate percent
-        tooltip.select('.label').html(d.data.label); // set current label           
+        var percent = Math.round(1000 * d.data.count / total) / 10; 
+        tooltip.select('.label').html(d.data.label);           
         tooltip.select('.count').html('Menus: ' + d.data.count); // set current count            
         tooltip.select('.percent').html(percent + '%'); // set percent calculated above          
         tooltip.style('display', 'block'); // set display                     
@@ -529,8 +528,8 @@ function getVizThree() {
     });
 
     path.on('mousemove', function (d) { // when mouse moves                  
-        tooltip.style('top', (d3.event.layerY + 10) + 'px') // always 10px below the cursor
-            .style('left', (d3.event.layerX + 10) + 'px'); // always 10px to the right of the mouse
+        tooltip.style('top', (d3.event.layerY + 10) + 'px') 
+            .style('left', (d3.event.layerX + 10) + 'px');
     });
 
     // define legend
@@ -637,12 +636,9 @@ function getVizThree() {
       <button disabled onclick="update(data1950)">1950</button>
       <button autofocus onclick="update(data2000)">2000</button>
       <br><br>
-      In this final chart, we will explore the relationship between different major food categories. 
+      In this chart, we will explore the relationship between different major food categories. 
       Here you can clearly see the relationship between the different food categories. Surprisingly dishes that combine
       multiple food categories are also very popular.<br><br>
-
-      Thank you for joining me in this journey! Remember that a major aspect of this narrative was the processing of the raw data.
-      This was  accomplished using the pandas library through Jupyter Notebooks.<br><br>
       `
     d3.select('#intro')
         .html(p)
@@ -653,10 +649,10 @@ function pageMod(page) {
         getVizOne();
     }
     if (page == 2) {
-        getVizSecond();
+        getVizThree();
     }
     if (page == 3) {
-        getVizThree();
+        getVizSecond();
     }
 }
 

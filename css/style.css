@@ -79,8 +79,9 @@ text {
 }
 
 /* tooltip */
+
 .tooltip {
-  background: #eee;
+        background: #eee;
   box-shadow: 0 0 5px #999999;
   color: #333;
   display: none;
@@ -100,8 +101,9 @@ text {
   margin: 0 auto;
   position: relative;
   display: block;
-  width: 1600px; 
+  width: 1200px; 
 }
+
 
 /* legend */
 .legend {
